@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Enigmatic
+namespace Enigmatic.Main
 {
     class Program
     {
