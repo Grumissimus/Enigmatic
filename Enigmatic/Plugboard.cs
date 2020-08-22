@@ -6,7 +6,7 @@ namespace Enigmatic.Main
 {
     public class Plugboard
     {
-        private Dictionary<char, char> inputMap;
+        private readonly Dictionary<char, char> inputMap;
 
         public Plugboard()
         {
@@ -18,10 +18,16 @@ namespace Enigmatic.Main
         public void Connect(char A, char B)
         {
             if (inputMap.ContainsKey(A))
-                throw new ArgumentException($"The {A} is already connected with {inputMap[A]}.");
+            {
+                Console.Error.WriteLine($"The {A} is already connected with {inputMap[A]}.");
+                return;
+            }
 
             if (inputMap.ContainsKey(B))
-                throw new ArgumentException($"The {B} is already connected with {inputMap[B]}.");
+            {
+                Console.Error.WriteLine($"The {B} is already connected with {inputMap[B]}.");
+                return;
+            }
 
             inputMap.Add(A, B);
             inputMap.Add(B, A);
@@ -29,7 +35,14 @@ namespace Enigmatic.Main
 
         public void Disconnect(char A)
         {
-            char B = inputMap.TryGetValue(A, out B) ? B : throw new ArgumentException($"The {A} is not connected to any other input.");
+            if ( !inputMap.ContainsKey(A) )
+            {
+                Console.Error.WriteLine($"The {A} is not connected to any other input.");
+                return;
+            }
+
+            char B = inputMap[B];
+
             inputMap.Remove(A);
             inputMap.Remove(B);
         }
