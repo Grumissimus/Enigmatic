@@ -50,7 +50,9 @@ namespace Enigmatic.Test
         }
 
         [TestCase("AAA", ExpectedResult = "KMF")]
+        [TestCase("ABC", ExpectedResult = "KFG")]
         [TestCase("ZZZ", ExpectedResult = "EKM")]
+        [TestCase("aaa", ExpectedResult = "KMF")]
         public string Rotor_RotatesAndEncryptsCharactersCorrectly(string code)
         {
             StringBuilder result = new StringBuilder();

@@ -28,8 +28,8 @@ namespace Enigmatic.Main
 
         public char Encrypt(char character)
         {
-            if (!(character >= 'A' && character <= 'Z')) return character;
             if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
+            if (!(character >= 'A' && character <= 'Z')) return character;
 
             return Map[GetIndex(character)];
         }
