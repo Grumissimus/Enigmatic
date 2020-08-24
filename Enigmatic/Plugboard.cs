@@ -41,7 +41,7 @@ namespace Enigmatic.Main
                 return;
             }
 
-            char B = inputMap[B];
+            char B = inputMap[A];
 
             inputMap.Remove(A);
             inputMap.Remove(B);

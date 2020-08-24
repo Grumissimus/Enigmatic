@@ -10,11 +10,11 @@ namespace Enigmatic.Main
         public string Turnover { get; private set; }
         public int Shift { get; private set; }
 
-        public Rotor(string map, string turnover)
+        public Rotor(string map, string turnover, int shift = 0)
         {
             Map = map;
             Turnover = turnover;
-            Shift = 0;
+            Shift = shift;
         }
 
         private int GetIndex(char character) => (character - 'A' + Shift) % 26;
