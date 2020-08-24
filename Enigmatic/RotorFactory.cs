@@ -14,6 +14,10 @@ namespace Enigmatic.Main
         static Rotor RailwayII() => new Rotor("NTZPSFBOKMWRCJDIVLAEYUXHGQ", "E");
         static Rotor RailwayIII() => new Rotor("JVIUBHTCDYAKEQZPOSGXNRMWFL", "V");
 
+        static Rotor SwissKI() => new Rotor("PEZUOHXSCVFMTBGLRINQJWAYDK", "Q");
+        static Rotor SwissKII() => new Rotor("ZOUESYDKFWPCIQXHMVBLGNJRAT", "E");
+        static Rotor SwissKIII() => new Rotor("EHRVXGAOBQUSIMZFLYNWKTPDJC", "V");
+
         static Rotor I() => new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q");
         static Rotor II() => new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", "E");
         static Rotor III() => new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", "V");
@@ -22,6 +26,8 @@ namespace Enigmatic.Main
         static Rotor VI() => new Rotor("JPGVOUMFYQBENHZRDKASXLICTW", "ZM");
         static Rotor VII() => new Rotor("VZBRGITYUPSDNHLXAWMJQOFECK", "ZM");
         static Rotor VIII() => new Rotor("FKQHTLXOCBJSPDZRAMEWNIUYGV", "ZM");
-    }
 
+        static Rotor Beta() => new Rotor("LEYJVCNIXWPBQMDRTAKZGFUHOS", "");
+        static Rotor Gamma() => new Rotor("FSOKANUERHMBTIYCWLQPZXVGJD", "");
+    }
 }

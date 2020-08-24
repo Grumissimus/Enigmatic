@@ -7,6 +7,7 @@ namespace Enigmatic.Main
     public static class EntryWheelFactory
     {
         static EntryWheel Default() => new EntryWheel();
-        static EntryWheel RailwayETW() => new EntryWheel("JVIUBHTCDYAKEQZPOSGXNRMWFL");
+        static EntryWheel RailwayETW() => new EntryWheel("QWERTZUIOASDFGHJKPYXCVBNML");
+        static EntryWheel SwissKETW() => new EntryWheel("QWERTZUIOASDFGHJKPYXCVBNML");
     }
 }
