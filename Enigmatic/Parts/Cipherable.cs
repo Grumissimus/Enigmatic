@@ -1,6 +1,7 @@
 ﻿using Enigmatic.Main.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 
@@ -53,18 +54,18 @@ namespace Enigmatic.Main.Parts
 
         public virtual char CipherInputCharacter(char character)
         {
-            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
-            if (!(character >= 'A' && character <= 'Z')) return character;
-
-            return InputMap[character];
+            return CipherCharacter(character, InputMap);
         }
 
         public virtual char CipherOutputCharacter(char character)
         {
-            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
-            if (!(character >= 'A' && character <= 'Z')) return character;
+            return CipherCharacter(character, OutputMap);
+        }
 
-            return OutputMap[character];
+        protected virtual char CipherCharacter(char character, Dictionary<char, char> cipherMap)
+        {
+            character = char.ToUpper(character);
+            return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".Contains(character) ? cipherMap[character] : character;
         }
 
         public char ToChar(int wiring)
@@ -74,10 +75,8 @@ namespace Enigmatic.Main.Parts
 
         public int ToWiring(char character)
         {
-            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
-            if (!(character >= 'A' && character <= 'Z')) return -1;
-
-            return character - 'A';
+            character = char.ToUpper(character);
+            return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".Contains(character) ? character - 'A' : character;
         }
     }
 }

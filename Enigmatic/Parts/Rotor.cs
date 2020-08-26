@@ -18,30 +18,17 @@ namespace Enigmatic.Main.Parts
             InitialPosition = ToWiring(initialPosition);
         }
 
-        public override char CipherInputCharacter(char character)
+        protected override char CipherCharacter(char character, Dictionary<char, char> cipherMap)
         {
-            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
+            character = char.ToUpper(character);
             if (!(character >= 'A' && character <= 'Z')) return character;
 
             character = ToChar( (ToWiring(character) + InitialPosition + Deflection) % 26 );
 
-            character = InputMap[character];
+            character = cipherMap[character];
             int temp = ToWiring(character) - Deflection;
 
             character = ToChar( (temp < 0 ? 26 + temp : temp) % 26 );
-            return character;
-        }
-        public override char CipherOutputCharacter(char character)
-        {
-            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
-            if (!(character >= 'A' && character <= 'Z')) return character;
-
-            character = ToChar((ToWiring(character) + InitialPosition + Deflection) % 26);
-
-            character = OutputMap[character];
-            int temp = ToWiring(character) - Deflection;
-
-            character = ToChar((temp < 0 ? 26 + temp : temp) % 26);
             return character;
         }
 
@@ -52,7 +39,7 @@ namespace Enigmatic.Main.Parts
 
         public char DeflectAndCipher(char character)
         {
-            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
+            character = char.ToUpper(character);
             if (!(character >= 'A' && character <= 'Z')) return character;
 
             IncrementDeflection();
