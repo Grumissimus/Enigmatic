@@ -1,4 +1,4 @@
-using Enigmatic.Main;
+using Enigmatic.Main.Parts;
 using NUnit.Framework;
 using System.Text;
 
@@ -14,29 +14,29 @@ namespace Enigmatic.Test
         [Test]
         public void Rotor_RotatesCorrectly()
         {
-            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q");
-            testRotor.Rotate();
-            Assert.AreEqual(testRotor.Shift, 1);
+            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", 'A');
+            testRotor.IncrementDeflection();
+            Assert.AreEqual(testRotor.Deflection, 1);
         }
 
         [Test]
         public void Rotor_DoesFullCircleCorrectly()
         {
-            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q");
+            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", 'A');
             for(int i = 0; i < 26; i++)
-                testRotor.Rotate();
+                testRotor.IncrementDeflection();
 
-            Assert.AreEqual(testRotor.Shift, 0);
+            Assert.AreEqual(testRotor.Deflection, 0);
         }
 
         [Test]
         public void Rotor_TurnOverWorksCorrectly()
         {
-            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q");
+            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", 'A');
             for (int i = 0; i < (int)('Q' - 'A'); i++)
-                testRotor.Rotate();
+                testRotor.IncrementDeflection();
 
-            Assert.IsTrue(testRotor.IsTurnover());
+            Assert.IsTrue( testRotor.IsInTurnover() );
         }
 
         [TestCase('A', ExpectedResult = 'E')]
@@ -45,25 +45,8 @@ namespace Enigmatic.Test
         [TestCase('Z', ExpectedResult = 'J')]
         public char Rotor_EncryptsCharactersCorrectly(char character)
         {
-            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q");
-            return testRotor.Encrypt(character);
-        }
-
-        [TestCase("AAA", ExpectedResult = "KMF")]
-        [TestCase("ABC", ExpectedResult = "KFG")]
-        [TestCase("ZZZ", ExpectedResult = "EKM")]
-        [TestCase("aaa", ExpectedResult = "KMF")]
-        public string Rotor_RotatesAndEncryptsCharactersCorrectly(string code)
-        {
-            StringBuilder result = new StringBuilder();
-            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q");
-
-            foreach(char ch in code)
-            {
-                result.Append(testRotor.RotateAndEncrypt(ch));
-            }
-
-            return result.ToString();
+            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", 'A');
+            return testRotor.CipherCharacter(character);
         }
     }
 }
