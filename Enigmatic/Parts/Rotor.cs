@@ -12,7 +12,7 @@ namespace Enigmatic.Main.Parts
         public int InitialPosition { get; }
         public int Deflection { get; protected set; }
 
-        public Rotor(string map, string turnover, char initialPosition) : base(map)
+        public Rotor(string map, string turnover, char initialPosition = 'A') : base(map)
         {
             Turnover = turnover;
             InitialPosition = ToWiring(initialPosition);

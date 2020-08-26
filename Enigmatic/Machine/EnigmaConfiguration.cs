@@ -18,43 +18,43 @@ namespace Enigmatic.Main.Machine
 
         public IStator Reflector { get; private set; }
 
-        public EnigmaConfiguration InstallPlugboard(IPlugboard plugboard)
+        public EnigmaConfiguration SetPlugboard(IPlugboard plugboard)
         {
             Plugboard = plugboard;
             return this;
         }
 
-        public EnigmaConfiguration InstallEntryWheel(IStator entryWheel)
+        public EnigmaConfiguration SetEntryWheel(IStator entryWheel)
         {
             EntryWheel = entryWheel;
             return this;
         }
 
-        public EnigmaConfiguration InstallRightRotor(IRotor rightRotor)
+        public EnigmaConfiguration SetRightRotor(IRotor rightRotor)
         {
             RightRotor = rightRotor;
             return this;
         }
 
-        public EnigmaConfiguration InstallMiddleRotor(IRotor middleRotor)
+        public EnigmaConfiguration SetMiddleRotor(IRotor middleRotor)
         {
             MiddleRotor = middleRotor;
             return this;
         }
 
-        public EnigmaConfiguration InstallLeftRotor(IRotor leftRotor)
+        public EnigmaConfiguration SetLeftRotor(IRotor leftRotor)
         {
             LeftRotor = leftRotor;
             return this;
         }
 
-        public EnigmaConfiguration InstallThinRotor(IRotor thinRotor)
+        public EnigmaConfiguration SetThinRotor(IRotor thinRotor)
         {
             ThinRotor = thinRotor;
             return this;
         }
 
-        public EnigmaConfiguration InstallReflector(IStator reflector)
+        public EnigmaConfiguration SetReflector(IStator reflector)
         {
             Reflector = reflector;
             return this;
@@ -63,22 +63,22 @@ namespace Enigmatic.Main.Machine
         public void Validate()
         {
             if( Plugboard == null)
-                throw new ArgumentException("A plugboard hasn't been installed.");
+                throw new ArgumentException("A plugboard hasn't been set.");
 
             if (EntryWheel == null)
-                throw new ArgumentException("An entry wheel hasn't been installed.");
+                throw new ArgumentException("An entry wheel hasn't been set.");
 
             if (Reflector == null)
-                throw new ArgumentException("A reflector hasn't been installed.");
+                throw new ArgumentException("A reflector hasn't been set.");
 
             if (RightRotor == null)
-                throw new ArgumentException("A right rotor hasn't been installed.");
+                throw new ArgumentException("A right rotor hasn't been set.");
 
             if (MiddleRotor == null)
-                throw new ArgumentException("A middle rotor hasn't been installed.");
+                throw new ArgumentException("A middle rotor hasn't been set.");
 
             if (LeftRotor == null)
-                throw new ArgumentException("A left rotor hasn't been installed.");
+                throw new ArgumentException("A left rotor hasn't been set.");
         }
     }
 }
