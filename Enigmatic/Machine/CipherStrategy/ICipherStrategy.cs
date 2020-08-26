@@ -6,7 +6,6 @@ namespace Enigmatic.Main.Machine.CipherStrategy
 {
     public interface ICipherStrategy
     {
-        public EnigmaMachine Enigma { get; }
-        string Apply(string message);
+        string Apply(EnigmaMachine enigma, string message);
     }
 }

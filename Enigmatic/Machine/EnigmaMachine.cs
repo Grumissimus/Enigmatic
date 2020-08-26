@@ -23,8 +23,6 @@ namespace Enigmatic.Main.Machine
 
         public EnigmaMachine(ICipherStrategy cipherStrategy, EnigmaConfiguration configuration)
         {
-            CipherStrategy = cipherStrategy;
-
             configuration.Validate();
 
             Plugboard = configuration.Plugboard;
@@ -36,11 +34,13 @@ namespace Enigmatic.Main.Machine
             ThinRotor = configuration.ThinRotor;
 
             Reflector = configuration.Reflector;
+
+            CipherStrategy = cipherStrategy;
         }
 
         public string CipherMessage(string message)
         {
-            return CipherStrategy.Apply(message);
+            return CipherStrategy.Apply(this, message);
         }
     }
 }

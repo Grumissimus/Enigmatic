@@ -46,7 +46,7 @@ namespace Enigmatic.Test
         public char Rotor_EncryptsCharactersCorrectly(char character)
         {
             var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", 'A');
-            return testRotor.CipherCharacter(character);
+            return testRotor.CipherInputCharacter(character);
         }
     }
 }

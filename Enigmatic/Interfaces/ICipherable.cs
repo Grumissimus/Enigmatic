@@ -7,6 +7,7 @@ namespace Enigmatic.Main.Interfaces
     {
         int ToWiring(char character);
         char ToChar(int wiring);
-        char CipherCharacter(char character);
+        char CipherInputCharacter(char character);
+        char CipherOutputCharacter(char character);
     }
 }

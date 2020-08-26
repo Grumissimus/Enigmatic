@@ -10,7 +10,23 @@ namespace Enigmatic.Main.Parts
     {
         public Plugboard()
         {
-            CipherMap = new Dictionary<char, char>();
+            InputMap = new Dictionary<char, char>();
+            OutputMap = new Dictionary<char, char>();
+        }
+        public override char CipherInputCharacter(char character)
+        {
+            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
+            if (!(character >= 'A' && character <= 'Z')) return character;
+
+            return InputMap.ContainsKey(character) ? InputMap[character] : character;
+        }
+
+        public override char CipherOutputCharacter(char character)
+        {
+            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
+            if (!(character >= 'A' && character <= 'Z')) return character;
+
+            return OutputMap.ContainsKey(character) ? OutputMap[character] : character;
         }
 
         public void Connect(char A, char B)
@@ -24,27 +40,27 @@ namespace Enigmatic.Main.Parts
             if (!(B >= 'A' && B <= 'Z'))
                 throw new ArgumentException($"Invalid character. Output can be only ASCII uppercase letter.");
 
-            if (CipherMap.ContainsKey(A))
-                throw new ArgumentException($"The {A} is already connected with {CipherMap[A]}.");
+            if (InputMap.ContainsKey(A))
+                throw new ArgumentException($"The {A} is already connected with {InputMap[A]}.");
 
-            if (CipherMap.ContainsKey(B))
-                throw new ArgumentException($"The {B} is already connected with {CipherMap[B]}.");
+            if (OutputMap.ContainsKey(B))
+                throw new ArgumentException($"The {B} is already connected with {OutputMap[B]}.");
 
-            CipherMap.Add(A, B);
-            CipherMap.Add(B, A);
+            InputMap.Add(A, B);
+            OutputMap.Add(B, A);
         }
         public void Disconnect(char A)
         {
-            char B = CipherMap.TryGetValue(A, out B) ? B : throw new ArgumentException($"The {A} is not connected to any other input.");
+            char B = InputMap.TryGetValue(A, out B) ? B : throw new ArgumentException($"The {A} is not connected to any other input.");
 
-            CipherMap.Remove(A);
-            CipherMap.Remove(B);
+            InputMap.Remove(A);
+            OutputMap.Remove(B);
         }
 
         public void Disconnect(char A, char B)
         {
-            CipherMap.Remove(A);
-            CipherMap.Remove(B);
+            InputMap.Remove(A);
+            OutputMap.Remove(B);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Enigmatic.Test
             StringBuilder message = new StringBuilder();
             foreach (char ch in alphabet)
             {
-                message.Append(entryWheel.CipherCharacter(ch));
+                message.Append(entryWheel.CipherInputCharacter(ch));
             }
 
             return message.ToString();
@@ -31,7 +31,7 @@ namespace Enigmatic.Test
             StringBuilder message = new StringBuilder();
             foreach (char ch in alphabet)
             {
-                message.Append(entryWheel.CipherCharacter(ch));
+                message.Append(entryWheel.CipherInputCharacter(ch));
             }
 
             return message.ToString();
@@ -43,7 +43,7 @@ namespace Enigmatic.Test
             StringBuilder message = new StringBuilder();
             foreach (char ch in alphabet)
             {
-                message.Append(entryWheel.CipherCharacter(ch));
+                message.Append(entryWheel.CipherInputCharacter(ch));
             }
 
             return message.ToString();

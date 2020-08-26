@@ -8,16 +8,19 @@ namespace Enigmatic.Main.Parts
 {
     public abstract class Cipherable : ICipherable
     {
-        public Dictionary<char, char> CipherMap { get; protected set; }
+        public Dictionary<char, char> InputMap { get; protected set; }
+        public Dictionary<char, char> OutputMap { get; protected set; }
 
         public Cipherable(string map = "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         {
             ValidateMap(map);
-            CipherMap = new Dictionary<char, char>();
+            InputMap = new Dictionary<char, char>();
+            OutputMap = new Dictionary<char, char>();
 
             for (int i = 0; i < map.Length; i++)
             {
-                CipherMap.Add(ToChar(i), map[i]);
+                InputMap.Add(ToChar(i), map[i]);
+                OutputMap.Add(map[i], ToChar(i));
             }
         }
 
@@ -48,12 +51,20 @@ namespace Enigmatic.Main.Parts
             return map;
         }
 
-        public virtual char CipherCharacter(char character)
+        public virtual char CipherInputCharacter(char character)
         {
             if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
             if (!(character >= 'A' && character <= 'Z')) return character;
 
-            return CipherMap[character];
+            return InputMap[character];
+        }
+
+        public virtual char CipherOutputCharacter(char character)
+        {
+            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
+            if (!(character >= 'A' && character <= 'Z')) return character;
+
+            return OutputMap[character];
         }
 
         public char ToChar(int wiring)

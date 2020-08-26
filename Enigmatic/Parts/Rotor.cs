@@ -18,15 +18,30 @@ namespace Enigmatic.Main.Parts
             InitialPosition = ToWiring(initialPosition);
         }
 
-        public override char CipherCharacter(char character)
+        public override char CipherInputCharacter(char character)
         {
-            character = ToChar((ToWiring(character) + InitialPosition + Deflection) % 26);
-
             if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
             if (!(character >= 'A' && character <= 'Z')) return character;
 
-            character = CipherMap[character];
-            character = ToChar((ToWiring(character) - Deflection) % 26);
+            character = ToChar( (ToWiring(character) + InitialPosition + Deflection) % 26 );
+
+            character = InputMap[character];
+            int temp = ToWiring(character) - Deflection;
+
+            character = ToChar( (temp < 0 ? 26 + temp : temp) % 26 );
+            return character;
+        }
+        public override char CipherOutputCharacter(char character)
+        {
+            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
+            if (!(character >= 'A' && character <= 'Z')) return character;
+
+            character = ToChar((ToWiring(character) + InitialPosition + Deflection) % 26);
+
+            character = OutputMap[character];
+            int temp = ToWiring(character) - Deflection;
+
+            character = ToChar((temp < 0 ? 26 + temp : temp) % 26);
             return character;
         }
 
@@ -37,11 +52,13 @@ namespace Enigmatic.Main.Parts
 
         public char DeflectAndCipher(char character)
         {
+            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
+            if (!(character >= 'A' && character <= 'Z')) return character;
+
             IncrementDeflection();
-            return CipherCharacter(character);
+            return CipherInputCharacter(character);
         }
 
         public bool IsInTurnover() => Turnover.Contains( ToChar(Deflection) );
-
     }
 }
