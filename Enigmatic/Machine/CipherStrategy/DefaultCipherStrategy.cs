@@ -18,6 +18,12 @@ namespace Enigmatic.Main.Machine.CipherStrategy
 
             foreach (char ch in message)
             {
+                if (!char.IsLetter(ch) || !(char.ToUpper(ch) >= 'A' && char.ToUpper(ch) <= 'Z'))
+                {
+                    encryptedMessage.Append(ch);
+                    continue;
+                }
+
                 //Input route
                 temp = enigma.EntryWheel.CipherInputCharacter(enigma.Plugboard.CipherInputCharacter(ch));
 

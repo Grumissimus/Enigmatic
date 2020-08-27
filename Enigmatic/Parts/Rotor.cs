@@ -20,12 +20,12 @@ namespace Enigmatic.Main.Parts
             character = char.ToUpper(character);
             if (!(character >= 'A' && character <= 'Z')) return character;
 
-            character = ToChar((ToWiring(character) + InitialPosition + Deflection) % 26);
+            character = ToChar((ToWiring(character) + Deflection + (26 - InitialPosition)) % 26);
 
             character = cipherMap[character];
             int temp = ToWiring(character) - Deflection;
 
-            character = ToChar((temp < 0 ? 26 + temp : temp) % 26);
+            character = ToChar(((temp < 0 ? 26 + temp : temp) + InitialPosition) % 26);
             return character;
         }
 
