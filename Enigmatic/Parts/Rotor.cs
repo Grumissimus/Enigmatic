@@ -34,7 +34,7 @@ namespace Enigmatic.Main.Parts
             Deflection = (Deflection + 1) % 26;
         }
 
-        public char DeflectAndCipherInput(char character)
+        public char DeflectAndCipher(char character)
         {
             character = char.ToUpper(character);
             if (!(character >= 'A' && character <= 'Z')) return character;
