@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Enigmatic.Main.Parts
+﻿namespace Enigmatic.Main.Parts
 {
     public class EntryWheel : Stator
     {

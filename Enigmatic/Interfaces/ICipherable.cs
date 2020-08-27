@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-
-namespace Enigmatic.Main.Interfaces
+﻿namespace Enigmatic.Main.Interfaces
 {
     public interface ICipherable
     {

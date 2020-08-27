@@ -1,9 +1,7 @@
 ﻿using Enigmatic.Main.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.IO.IsolatedStorage;
 using System.Linq;
-using System.Text;
 
 namespace Enigmatic.Main.Parts
 {
@@ -39,12 +37,12 @@ namespace Enigmatic.Main.Parts
                 throw new ArgumentException("The map is less than 26 characters long.");
             }
 
-            if ( map.Distinct().Count() < 26 )
+            if (map.Distinct().Count() < 26)
             {
                 throw new ArgumentException("The map has repeating characters.");
             }
 
-            if( !map.All( ch => ch >= 'A' && ch <= 'Z') )
+            if (!map.All(ch => ch >= 'A' && ch <= 'Z'))
             {
                 throw new ArgumentException("The map contains invalid characters. The cipher map consists of only ANSI uppercase letters.");
             }

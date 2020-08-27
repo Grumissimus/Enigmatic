@@ -1,8 +1,6 @@
 ﻿using Enigmatic.Main.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Text;
 
 namespace Enigmatic.Main.Parts
 {
@@ -34,7 +32,7 @@ namespace Enigmatic.Main.Parts
             A = char.ToUpper(A);
             B = char.ToUpper(B);
 
-            if( !(A >= 'A' && A <= 'Z'))
+            if (!(A >= 'A' && A <= 'Z'))
                 throw new ArgumentException($"Invalid character. Input can be only ASCII uppercase letter.");
 
             if (!(B >= 'A' && B <= 'Z'))

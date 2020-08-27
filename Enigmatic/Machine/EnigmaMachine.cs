@@ -1,8 +1,5 @@
 ﻿using Enigmatic.Main.Interfaces;
 using Enigmatic.Main.Machine.CipherStrategy;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Enigmatic.Main.Machine
 {

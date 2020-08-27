@@ -1,8 +1,5 @@
 ﻿using Enigmatic.Main.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Enigmatic.Main.Parts
 {
@@ -23,12 +20,12 @@ namespace Enigmatic.Main.Parts
             character = char.ToUpper(character);
             if (!(character >= 'A' && character <= 'Z')) return character;
 
-            character = ToChar( (ToWiring(character) + InitialPosition + Deflection) % 26 );
+            character = ToChar((ToWiring(character) + InitialPosition + Deflection) % 26);
 
             character = cipherMap[character];
             int temp = ToWiring(character) - Deflection;
 
-            character = ToChar( (temp < 0 ? 26 + temp : temp) % 26 );
+            character = ToChar((temp < 0 ? 26 + temp : temp) % 26);
             return character;
         }
 
@@ -37,7 +34,7 @@ namespace Enigmatic.Main.Parts
             Deflection = (Deflection + 1) % 26;
         }
 
-        public char DeflectAndCipher(char character)
+        public char DeflectAndCipherInput(char character)
         {
             character = char.ToUpper(character);
             if (!(character >= 'A' && character <= 'Z')) return character;
@@ -46,6 +43,6 @@ namespace Enigmatic.Main.Parts
             return CipherInputCharacter(character);
         }
 
-        public bool IsInTurnover() => Turnover.Contains( ToChar(Deflection) );
+        public bool IsInTurnover() => Turnover.Contains(ToChar(Deflection));
     }
 }

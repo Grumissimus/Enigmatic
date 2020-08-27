@@ -1,7 +1,4 @@
-﻿using Enigmatic.Main.Parts;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace Enigmatic.Main.Machine.CipherStrategy
 {
@@ -19,10 +16,10 @@ namespace Enigmatic.Main.Machine.CipherStrategy
             StringBuilder encryptedMessage = new StringBuilder();
             char temp;
 
-            foreach(char ch in message)
+            foreach (char ch in message)
             {
                 //Input route
-                temp = enigma.EntryWheel.CipherInputCharacter( enigma.Plugboard.CipherInputCharacter(ch) );
+                temp = enigma.EntryWheel.CipherInputCharacter(enigma.Plugboard.CipherInputCharacter(ch));
 
                 temp = enigma.RightRotor.DeflectAndCipher(temp);
 

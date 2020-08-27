@@ -1,15 +1,11 @@
 ﻿using Enigmatic.Main.Interfaces;
-using Enigmatic.Main.Machine.CipherStrategy;
-using Enigmatic.Main.Parts;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Enigmatic.Main.Machine
 {
     public class EnigmaConfiguration
     {
-        public IPlugboard Plugboard { get; private set;  }
+        public IPlugboard Plugboard { get; private set; }
         public IStator EntryWheel { get; private set; }
         public IRotor LeftRotor { get; private set; }
         public IRotor MiddleRotor { get; private set; }
@@ -62,7 +58,7 @@ namespace Enigmatic.Main.Machine
 
         public void Validate()
         {
-            if( Plugboard == null)
+            if (Plugboard == null)
                 throw new ArgumentException("A plugboard hasn't been set.");
 
             if (EntryWheel == null)

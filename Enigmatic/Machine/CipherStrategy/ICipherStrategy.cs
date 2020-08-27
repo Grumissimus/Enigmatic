@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Enigmatic.Main.Machine.CipherStrategy
+﻿namespace Enigmatic.Main.Machine.CipherStrategy
 {
     public interface ICipherStrategy
     {
