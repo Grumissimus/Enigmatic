@@ -25,6 +25,7 @@ namespace Enigmatic.Test
 
         [TestCase("AAAAA AAAAA", ExpectedResult = "SSKWS JNSEO")]
         [TestCase("HELLO WORLD", ExpectedResult = "KCUBR KIDKN")]
+        [TestCase("VERY LONG TEXT TO CHECK IF THE ENIGMA WORKS CORRECTLY", ExpectedResult = "TCYH ISAY UBDN DT SRBXW WV BXM MVBBTF OITTO XXIYJKBIN")]
         public string EnigmaI_EncryptsMessageCorrectly(string message)
         {
             return EnigmaI.CipherMessage(message);
