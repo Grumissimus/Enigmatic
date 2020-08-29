@@ -19,7 +19,7 @@ namespace Enigmatic.Test
                 .SetRightRotor(RotorFactory.III('A'))
                 .SetMiddleRotor(RotorFactory.II('A'))
                 .SetLeftRotor(RotorFactory.I('A'))
-                .SetReflector((StaticReflector)ReflectorFactory.A());
+                .SetReflector((Reflector)ReflectorFactory.A());
             EnigmaI = new EnigmaMachine(new DefaultCipherStrategy(), config);
         }
 
@@ -43,7 +43,7 @@ namespace Enigmatic.Test
                 .SetRightRotor(RotorFactory.III(initPos[0]))
                 .SetMiddleRotor(RotorFactory.II(initPos[1]))
                 .SetLeftRotor(RotorFactory.I(initPos[2]))
-                .SetReflector((StaticReflector)ReflectorFactory.A());
+                .SetReflector((Reflector)ReflectorFactory.A());
             EnigmaI = new EnigmaMachine(new DefaultCipherStrategy(), config);
             return EnigmaI.CipherMessage(message);
         }

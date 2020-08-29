@@ -1,4 +1,5 @@
 ﻿using Enigmatic.Main.Interfaces;
+using Enigmatic.Main.Parts;
 using System;
 
 namespace Enigmatic.Main.Machine
@@ -6,13 +7,13 @@ namespace Enigmatic.Main.Machine
     public class EnigmaConfiguration
     {
         public IPlugboard Plugboard { get; private set; }
-        public IStator EntryWheel { get; private set; }
+        public EntryWheel EntryWheel { get; private set; }
         public IRotor LeftRotor { get; private set; }
         public IRotor MiddleRotor { get; private set; }
         public IRotor RightRotor { get; private set; }
         public IRotor ThinRotor { get; private set; }
 
-        public IStator Reflector { get; private set; }
+        public IReflector Reflector { get; private set; }
 
         public EnigmaConfiguration SetPlugboard(IPlugboard plugboard)
         {
@@ -20,7 +21,7 @@ namespace Enigmatic.Main.Machine
             return this;
         }
 
-        public EnigmaConfiguration SetEntryWheel(IStator entryWheel)
+        public EnigmaConfiguration SetEntryWheel(EntryWheel entryWheel)
         {
             EntryWheel = entryWheel;
             return this;
@@ -50,7 +51,7 @@ namespace Enigmatic.Main.Machine
             return this;
         }
 
-        public EnigmaConfiguration SetReflector(IStator reflector)
+        public EnigmaConfiguration SetReflector(IReflector reflector)
         {
             Reflector = reflector;
             return this;
