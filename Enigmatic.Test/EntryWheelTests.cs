@@ -27,7 +27,7 @@ namespace Enigmatic.Test
         [TestCase("ABCDEFGHIJKLMNOPQRSTUVWXYZ", ExpectedResult = "QWERTZUIOASDFGHJKPYXCVBNML")]
         public string ETW_K_CipherCharactersCorrectly(string alphabet)
         {
-            EntryWheel entryWheel = EntryWheelFactory.ETW();
+            EntryWheel entryWheel = EntryWheelFactory.Etw();
             StringBuilder message = new StringBuilder();
             foreach (char ch in alphabet)
             {
