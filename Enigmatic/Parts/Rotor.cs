@@ -9,6 +9,13 @@ namespace Enigmatic.Main.Parts
         public int InitialPosition { get; }
         public int Deflection { get; protected set; }
 
+        public Rotor(string output, string turnover, char initialPosition = 'A') : base(output)
+        {
+            Deflection = 0;
+            Turnover = turnover;
+            InitialPosition = _input.IndexOf(initialPosition);
+        }
+
         public Rotor(string input, string output, string turnover, char initialPosition = 'A') : base(input, output)
         {
             Deflection = 0;
@@ -27,8 +34,7 @@ namespace Enigmatic.Main.Parts
 
             tempInput = CipherMap.ContainsKey(_input[deflectedIndex]) ? CipherMap.GetByKey(_input[deflectedIndex]) : tempInput;
 
-            int temp = _input.IndexOf(tempInput) - Deflection;
-            deflectedIndex = ((temp < 0 ? _input.Length + temp : temp) + InitialPosition) % _input.Length;
+            deflectedIndex = (_input.IndexOf(tempInput) - Deflection + _input.Length + InitialPosition) % _input.Length;
 
             return char.IsLower(input) ? char.ToLower(_input[deflectedIndex]) : _input[deflectedIndex];
         }
@@ -44,8 +50,7 @@ namespace Enigmatic.Main.Parts
 
             tempOutput = CipherMap.ContainsValue(_input[deflectedIndex]) ? CipherMap.GetByValue(_input[deflectedIndex]) : tempOutput;
 
-            int temp = _input.IndexOf(tempOutput) - Deflection;
-            deflectedIndex = ((temp < 0 ? _input.Length + temp : temp) + InitialPosition) % _input.Length;
+            deflectedIndex = (_input.IndexOf(tempOutput) - Deflection + _input.Length + InitialPosition) % _input.Length;
 
             return char.IsLower(output) ? char.ToLower(_input[deflectedIndex]) : _input[deflectedIndex];
         }

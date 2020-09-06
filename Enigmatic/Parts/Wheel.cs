@@ -12,6 +12,11 @@ namespace Enigmatic.Main.Parts
         protected string _output;
         public BiDictionary<char, char> CipherMap { get; protected set; }
 
+        public Wheel(string output)
+        {
+            Initialize("ABCDEFGHIJKLMNOPQRSTUVWXYZ", output);
+        }
+
         public Wheel(string input, string output)
         {
             Initialize(input, output);
@@ -48,14 +53,8 @@ namespace Enigmatic.Main.Parts
             }
         }
 
-        public virtual char CipherInput(char input)
-        {
-            return CipherMap.ContainsKey(input) ? CipherMap.GetByKey(input) : input;
-        }
+        public virtual char CipherInput(char input) => CipherMap.ContainsKey(input) ? CipherMap.GetByKey(input) : input;
 
-        public virtual char CipherOutput(char output)
-        {
-            return CipherMap.ContainsValue(output) ? CipherMap.GetByValue(output) : output;
-        }
+        public virtual char CipherOutput(char output) => CipherMap.ContainsValue(output) ? CipherMap.GetByValue(output) : output;
     }
 }
