@@ -6,8 +6,8 @@ namespace Enigmatic.Main.Common
 {
     public class BiDictionary<TKey, TValue>
     {
-        private Dictionary<TKey, TValue> _forward;
-        private Dictionary<TValue, TKey> _backward;
+        private readonly Dictionary<TKey, TValue> _forward;
+        private readonly Dictionary<TValue, TKey> _backward;
 
         public BiDictionary()
         {

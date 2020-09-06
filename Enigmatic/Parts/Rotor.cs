@@ -1,4 +1,5 @@
 ﻿using Enigmatic.Main.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace Enigmatic.Main.Parts
@@ -9,18 +10,22 @@ namespace Enigmatic.Main.Parts
         public int InitialPosition { get; }
         public int Deflection { get; protected set; }
 
-        public Rotor(string output, string turnover, char initialPosition = 'A') : base(output)
+        public Rotor(string output, string turnover, char initialPosition) : base(output)
         {
             Deflection = 0;
             Turnover = turnover;
-            InitialPosition = _input.IndexOf(initialPosition);
+            InitialPosition = _input.IndexOf(initialPosition) == -1 ?
+                throw new ArgumentException("Initial position is set on the character that doesn't exist.") :
+                _input.IndexOf(initialPosition);
         }
 
-        public Rotor(string input, string output, string turnover, char initialPosition = 'A') : base(input, output)
+        public Rotor(string input, string output, string turnover, char initialPosition) : base(input, output)
         {
             Deflection = 0;
             Turnover = turnover;
-            InitialPosition = input.IndexOf(initialPosition);
+            InitialPosition = _input.IndexOf(initialPosition) == -1 ? 
+                throw new ArgumentException("Initial position is set on the character that doesn't exist.") : 
+                _input.IndexOf(initialPosition);
         }
 
         public override char CipherInput(char input)

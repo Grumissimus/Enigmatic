@@ -1,6 +1,7 @@
 ﻿using Enigmatic.Main.Common;
 using Enigmatic.Main.Interfaces;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Enigmatic.Main.Parts
@@ -33,14 +34,24 @@ namespace Enigmatic.Main.Parts
             }
         }
 
-        public Plugboard(string validCharacters, string connections, char separator = ' ')
+        public Plugboard(string validCharacters, string connections = "", char separator = ' ')
         {
             _validCharacters = validCharacters;
             Wiring = new BiDictionary<char, char>();
 
-            foreach(string conn in connections.Split(separator))
+            if (!string.IsNullOrEmpty(connections))
             {
-                Connect(conn[0], conn[1]);
+                string[] connectionsArray = connections.Split(separator);
+
+                if (!connectionsArray.All(x => x.Length == 2))
+                {
+                    throw new ArgumentException("Plugboard configuration contains at least one incorrect connection.");
+                }
+
+                foreach (string conn in connections.Split(separator))
+                {
+                    Connect(conn[0], conn[1]);
+                }
             }
         }
 

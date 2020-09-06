@@ -54,7 +54,6 @@ namespace Enigmatic.Main.Parts
         }
 
         public virtual char CipherInput(char input) => CipherMap.ContainsKey(input) ? CipherMap.GetByKey(input) : input;
-
         public virtual char CipherOutput(char output) => CipherMap.ContainsValue(output) ? CipherMap.GetByValue(output) : output;
     }
 }

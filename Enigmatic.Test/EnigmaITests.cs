@@ -1,5 +1,5 @@
 ﻿using Enigmatic.Main.Machine;
-using Enigmatic.Main.Machine.CipherStrategy;
+using Enigmatic.Main.Machine.EnigmaI;
 using Enigmatic.Main.Parts;
 using NUnit.Framework;
 using System.Text;
@@ -8,19 +8,11 @@ namespace Enigmatic.Test
 {
     class EnigmaITests
     {
-        EnigmaMachine EnigmaI;
+        IEnigma EnigmaI;
 
         [SetUp]
         public void Setup()
         {
-            var config = new EnigmaConfiguration()
-                .SetPlugboard(new Plugboard("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
-                .SetEntryWheel(EntryWheelFactory.Default())
-                .SetRightRotor(RotorFactory.III('A'))
-                .SetMiddleRotor(RotorFactory.II('A'))
-                .SetLeftRotor(RotorFactory.I('A'))
-                .SetReflector(ReflectorFactory.A());
-            EnigmaI = new EnigmaMachine(new DefaultCipherStrategy(), config);
         }
 
         [TestCase("AAAAA AAAAA", ExpectedResult = "SSKWS JNSEO")]
@@ -30,22 +22,16 @@ namespace Enigmatic.Test
             ExpectedResult = "BPIU ISAYAZ SIVO KW DGSGM UM LDW ATASNT E (YELS) OFSCN OEMLKJAGT SLW PDMGRWF ZNTIQ BGZWCBGPGO MTBEBFW EDRIIAAB")]
         public string EnigmaI_EncryptsMessageCorrectly(string message)
         {
-            return EnigmaI.CipherMessage(message);
+            EnigmaI = new EnigmaI("I II III", "A A A", "A", "");
+            return EnigmaI.EncryptMessage(message);
         }
 
-        [TestCase("AAAA AAAA AAAA", new char[] { 'B', 'A', 'A' }, ExpectedResult = "ISSK WSJN SEOW")]
-        [TestCase("HELLO WORLD", new char[] { 'C', 'K', 'M' }, ExpectedResult = "KKAMA JGMBW")]
-        public string EnigmaI_EncryptsMessageCorrectlyWithSetInitialPositionsDifferentThanAAA(string message, char[] initPos)
+        [TestCase("AAAA AAAA AAAA", "B A A", ExpectedResult = "RLGO KTUC PSMR")]
+        [TestCase("HELLO WORLD", "C K M", ExpectedResult = "NFTBU ZCGMB")]
+        public string EnigmaI_EncryptsMessageCorrectlyWithSetInitialPositionsDifferentThanAAA(string message, string initPos)
         {
-            var config = new EnigmaConfiguration()
-                .SetPlugboard(new Plugboard("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
-                .SetEntryWheel(EntryWheelFactory.Default())
-                .SetRightRotor(RotorFactory.III(initPos[0]))
-                .SetMiddleRotor(RotorFactory.II(initPos[1]))
-                .SetLeftRotor(RotorFactory.I(initPos[2]))
-                .SetReflector(ReflectorFactory.A());
-            EnigmaI = new EnigmaMachine(new DefaultCipherStrategy(), config);
-            return EnigmaI.CipherMessage(message);
+            EnigmaI = new EnigmaI("I II III", initPos, "A", "");
+            return EnigmaI.EncryptMessage(message);
         }
     }
 }
