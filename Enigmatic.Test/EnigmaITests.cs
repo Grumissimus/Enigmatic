@@ -14,12 +14,12 @@ namespace Enigmatic.Test
         public void Setup()
         {
             var config = new EnigmaConfiguration()
-                .SetPlugboard(new Plugboard())
+                .SetPlugboard(new Plugboard("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
                 .SetEntryWheel(EntryWheelFactory.Default())
                 .SetRightRotor(RotorFactory.III('A'))
                 .SetMiddleRotor(RotorFactory.II('A'))
                 .SetLeftRotor(RotorFactory.I('A'))
-                .SetReflector((Reflector)ReflectorFactory.A());
+                .SetReflector(ReflectorFactory.A());
             EnigmaI = new EnigmaMachine(new DefaultCipherStrategy(), config);
         }
 
@@ -38,12 +38,12 @@ namespace Enigmatic.Test
         public string EnigmaI_EncryptsMessageCorrectlyWithSetInitialPositionsDifferentThanAAA(string message, char[] initPos)
         {
             var config = new EnigmaConfiguration()
-                .SetPlugboard(new Plugboard())
+                .SetPlugboard(new Plugboard("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
                 .SetEntryWheel(EntryWheelFactory.Default())
                 .SetRightRotor(RotorFactory.III(initPos[0]))
                 .SetMiddleRotor(RotorFactory.II(initPos[1]))
                 .SetLeftRotor(RotorFactory.I(initPos[2]))
-                .SetReflector((Reflector)ReflectorFactory.A());
+                .SetReflector(ReflectorFactory.A());
             EnigmaI = new EnigmaMachine(new DefaultCipherStrategy(), config);
             return EnigmaI.CipherMessage(message);
         }

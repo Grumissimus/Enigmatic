@@ -6,16 +6,16 @@ namespace Enigmatic.Main.Machine
 {
     public class EnigmaMachine : IEnigmaMachine
     {
-        public IPlugboard Plugboard { get; private set; }
+        public Plugboard Plugboard { get; private set; }
 
         public EntryWheel EntryWheel { get; private set; }
 
-        public IRotor LeftRotor { get; private set; }
-        public IRotor MiddleRotor { get; private set; }
-        public IRotor RightRotor { get; private set; }
-        public IRotor ThinRotor { get; private set; }
+        public Rotor LeftRotor { get; private set; }
+        public Rotor MiddleRotor { get; private set; }
+        public Rotor RightRotor { get; private set; }
+        public Rotor ThinRotor { get; private set; }
 
-        public IReflector Reflector { get; private set; }
+        public Reflector Reflector { get; private set; }
 
         public ICipherStrategy CipherStrategy { get; private set; }
 

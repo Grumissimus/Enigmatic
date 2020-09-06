@@ -3,46 +3,66 @@ using System.Collections.Generic;
 
 namespace Enigmatic.Main.Parts
 {
-    public class Rotor : Cipherable, IRotor
+    public class Rotor : Wheel, IRotor
     {
         public string Turnover { get; }
         public int InitialPosition { get; }
         public int Deflection { get; protected set; }
 
-        public Rotor(string map, string turnover, char initialPosition = 'A') : base(map)
+        public Rotor(string input, string output, string turnover, char initialPosition = 'A') : base(input, output)
         {
+            Deflection = 0;
             Turnover = turnover;
-            InitialPosition = ToWiring(initialPosition);
+            InitialPosition = input.IndexOf(initialPosition);
         }
 
-        protected override char CipherCharacter(char character, Dictionary<char, char> cipherMap)
+        public override char CipherInput(char input)
         {
-            character = char.ToUpper(character);
-            if (!(character >= 'A' && character <= 'Z')) return character;
+            char tempInput = char.ToUpper(input);
 
-            character = ToChar((ToWiring(character) + Deflection + (26 - InitialPosition)) % 26);
+            if (!_input.Contains(tempInput))
+                return tempInput;
 
-            character = cipherMap[character];
-            int temp = ToWiring(character) - Deflection;
+            int deflectedIndex = (_input.IndexOf(tempInput) + Deflection + _input.Length - InitialPosition) % _input.Length;
 
-            character = ToChar(((temp < 0 ? 26 + temp : temp) + InitialPosition) % 26);
-            return character;
+            tempInput = CipherMap.ContainsKey(_input[deflectedIndex]) ? CipherMap.GetByKey(_input[deflectedIndex]) : tempInput;
+
+            int temp = _input.IndexOf(tempInput) - Deflection;
+            deflectedIndex = ((temp < 0 ? _input.Length + temp : temp) + InitialPosition) % _input.Length;
+
+            return char.IsLower(input) ? char.ToLower(_input[deflectedIndex]) : _input[deflectedIndex];
+        }
+
+        public override char CipherOutput(char output)
+        {
+            char tempOutput = char.ToUpper(output);
+
+            if (!_output.Contains(tempOutput))
+                return tempOutput;
+
+            int deflectedIndex = (_input.IndexOf(tempOutput) + Deflection + _input.Length - InitialPosition) % _input.Length;
+
+            tempOutput = CipherMap.ContainsValue(_input[deflectedIndex]) ? CipherMap.GetByValue(_input[deflectedIndex]) : tempOutput;
+
+            int temp = _input.IndexOf(tempOutput) - Deflection;
+            deflectedIndex = ((temp < 0 ? _input.Length + temp : temp) + InitialPosition) % _input.Length;
+
+            return char.IsLower(output) ? char.ToLower(_input[deflectedIndex]) : _input[deflectedIndex];
         }
 
         public void IncrementDeflection()
         {
-            Deflection = (Deflection + 1) % 26;
+            Deflection = (Deflection + 1) % _input.Length;
         }
 
         public char DeflectAndCipher(char character)
         {
-            character = char.ToUpper(character);
-            if (!(character >= 'A' && character <= 'Z')) return character;
+            if (!_input.Contains(character)) return character;
 
             IncrementDeflection();
-            return CipherInputCharacter(character);
+            return CipherInput(character);
         }
 
-        public bool IsInTurnover() => Turnover.Contains(ToChar(Deflection));
+        public bool IsInTurnover() => Turnover.Contains(_input[Deflection]);
     }
 }

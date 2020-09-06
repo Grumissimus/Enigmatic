@@ -4,13 +4,13 @@ namespace Enigmatic.Main.Parts
 {
     public static class ReflectorFactory
     {
-        public static IReflector A() => new Reflector("EJMZALYXVBWFCRQUONTSPIKHGD");
-        public static IReflector B() => new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT");
-        public static IReflector C() => new Reflector("FVPJIAOYEDRZXWGCTKUQSBNMHL");
-        public static IReflector Tirpitz() => new Reflector("GEKPBTAUMOCNILJDXZYFHWVQSR");
-        public static IReflector UkwD() => new Reflector("IMETCGFRAYSQBZXWLHKDVUPOJN");
-        public static IReflector Norenigma() => new Reflector("MOWJYPUXNDSRAIBFVLKZGQCHET");
-        public static IReflector UkwKD() => new Reflector("KOTVPNLMJIAGHFBEWYXCZDQSRU");
-        public static IReflector Railway() => new Reflector("QYHOGNECVPUZTFDJAXWMKISRBL");
+        public static Reflector A() => new Reflector("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "EJMZALYXVBWFCRQUONTSPIKHGD");
+        public static Reflector B() => new Reflector("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "YRUHQSLDPXNGOKMIEBFZCWVJAT");
+        public static Reflector C() => new Reflector("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "FVPJIAOYEDRZXWGCTKUQSBNMHL");
+        public static Reflector Tirpitz() => new Reflector("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "GEKPBTAUMOCNILJDXZYFHWVQSR");
+        public static Reflector UkwD() => new Reflector("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "IMETCGFRAYSQBZXWLHKDVUPOJN");
+        public static Reflector Norenigma() => new Reflector("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "MOWJYPUXNDSRAIBFVLKZGQCHET");
+        public static Reflector UkwKD() => new Reflector("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "KOTVPNLMJIAGHFBEWYXCZDQSRU");
+        public static Reflector Railway() => new Reflector("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "QYHOGNECVPUZTFDJAXWMKISRBL");
     }
 }

@@ -19,34 +19,34 @@ namespace Enigmatic.Main.Machine.CipherStrategy
             foreach (char ch in message)
             {
                 //Input route
-                temp = enigma.EntryWheel.CipherInputCharacter(enigma.Plugboard.CipherInputCharacter(ch));
+                temp = enigma.EntryWheel.CipherInput(enigma.Plugboard.Cipher(ch));
 
                 temp = enigma.RightRotor.DeflectAndCipher(temp);
 
                 temp = enigma.RightRotor.IsInTurnover() ?
                     enigma.MiddleRotor.DeflectAndCipher(temp) :
-                    enigma.MiddleRotor.CipherInputCharacter(temp);
+                    enigma.MiddleRotor.CipherInput(temp);
 
                 temp = enigma.MiddleRotor.IsInTurnover() ?
                     enigma.LeftRotor.DeflectAndCipher(temp) :
-                    enigma.LeftRotor.CipherInputCharacter(temp);
+                    enigma.LeftRotor.CipherInput(temp);
 
-                temp = enigma.ThinRotor.CipherInputCharacter(temp);
+                temp = enigma.ThinRotor.CipherInput(temp);
 
-                temp = enigma.Reflector.CipherInputCharacter(temp);
+                temp = enigma.Reflector.CipherInput(temp);
 
                 //Output route
-                temp = enigma.ThinRotor.CipherOutputCharacter(temp);
+                temp = enigma.ThinRotor.CipherOutput(temp);
 
-                temp = enigma.LeftRotor.CipherOutputCharacter(temp);
+                temp = enigma.LeftRotor.CipherOutput(temp);
 
-                temp = enigma.MiddleRotor.CipherOutputCharacter(temp);
+                temp = enigma.MiddleRotor.CipherOutput(temp);
 
-                temp = enigma.RightRotor.CipherOutputCharacter(temp);
+                temp = enigma.RightRotor.CipherOutput(temp);
 
-                temp = enigma.EntryWheel.CipherOutputCharacter(temp);
+                temp = enigma.EntryWheel.CipherOutput(temp);
 
-                temp = enigma.Plugboard.CipherOutputCharacter(temp);
+                temp = enigma.Plugboard.Cipher(temp);
 
                 encryptedMessage.Append(temp);
             }

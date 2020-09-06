@@ -14,7 +14,7 @@ namespace Enigmatic.Test
         [Test]
         public void Rotor_RotatesCorrectly()
         {
-            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", 'A');
+            Rotor testRotor = RotorFactory.I('A');
             testRotor.IncrementDeflection();
             Assert.AreEqual(testRotor.Deflection, 1);
         }
@@ -22,8 +22,8 @@ namespace Enigmatic.Test
         [Test]
         public void Rotor_DoesFullCircleCorrectly()
         {
-            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", 'A');
-            for(int i = 0; i < 26; i++)
+            var testRotor = RotorFactory.I('A');
+            for (int i = 0; i < 26; i++)
                 testRotor.IncrementDeflection();
 
             Assert.AreEqual(testRotor.Deflection, 0);
@@ -32,8 +32,8 @@ namespace Enigmatic.Test
         [Test]
         public void Rotor_TurnOverWorksCorrectly()
         {
-            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", 'A');
-            for (int i = 0; i < (int)('Q' - 'A'); i++)
+            var testRotor = RotorFactory.I('A');
+            for (int i = 0; i < 'R' - 'A'; i++)
                 testRotor.IncrementDeflection();
 
             Assert.IsTrue( testRotor.IsInTurnover() );
@@ -45,8 +45,8 @@ namespace Enigmatic.Test
         [TestCase('Z', ExpectedResult = 'J')]
         public char Rotor_EncryptsCharactersCorrectly(char character)
         {
-            var testRotor = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", 'A');
-            return testRotor.CipherInputCharacter(character);
+            var testRotor = RotorFactory.I('A');
+            return testRotor.CipherInput(character);
         }
     }
 }

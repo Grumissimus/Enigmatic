@@ -6,16 +6,16 @@ namespace Enigmatic.Main.Machine
 {
     public class EnigmaConfiguration
     {
-        public IPlugboard Plugboard { get; private set; }
+        public Plugboard Plugboard { get; private set; }
         public EntryWheel EntryWheel { get; private set; }
-        public IRotor LeftRotor { get; private set; }
-        public IRotor MiddleRotor { get; private set; }
-        public IRotor RightRotor { get; private set; }
-        public IRotor ThinRotor { get; private set; }
+        public Rotor LeftRotor { get; private set; }
+        public Rotor MiddleRotor { get; private set; }
+        public Rotor RightRotor { get; private set; }
+        public Rotor ThinRotor { get; private set; }
 
-        public IReflector Reflector { get; private set; }
+        public Reflector Reflector { get; private set; }
 
-        public EnigmaConfiguration SetPlugboard(IPlugboard plugboard)
+        public EnigmaConfiguration SetPlugboard(Plugboard plugboard)
         {
             Plugboard = plugboard;
             return this;
@@ -27,31 +27,31 @@ namespace Enigmatic.Main.Machine
             return this;
         }
 
-        public EnigmaConfiguration SetRightRotor(IRotor rightRotor)
+        public EnigmaConfiguration SetRightRotor(Rotor rightRotor)
         {
             RightRotor = rightRotor;
             return this;
         }
 
-        public EnigmaConfiguration SetMiddleRotor(IRotor middleRotor)
+        public EnigmaConfiguration SetMiddleRotor(Rotor middleRotor)
         {
             MiddleRotor = middleRotor;
             return this;
         }
 
-        public EnigmaConfiguration SetLeftRotor(IRotor leftRotor)
+        public EnigmaConfiguration SetLeftRotor(Rotor leftRotor)
         {
             LeftRotor = leftRotor;
             return this;
         }
 
-        public EnigmaConfiguration SetThinRotor(IRotor thinRotor)
+        public EnigmaConfiguration SetThinRotor(Rotor thinRotor)
         {
             ThinRotor = thinRotor;
             return this;
         }
 
-        public EnigmaConfiguration SetReflector(IReflector reflector)
+        public EnigmaConfiguration SetReflector(Reflector reflector)
         {
             Reflector = reflector;
             return this;

@@ -1,64 +1,43 @@
-﻿using Enigmatic.Main.Interfaces;
+﻿using Enigmatic.Main.Common;
+using Enigmatic.Main.Interfaces;
 using System;
 using System.Collections.Generic;
 
 namespace Enigmatic.Main.Parts
 {
-    public class Plugboard : Cipherable, IPlugboard
+    public class Plugboard : IPlugboard
     {
-        public Plugboard()
-        {
-            InputMap = new Dictionary<char, char>();
-            OutputMap = new Dictionary<char, char>();
-        }
-        public override char CipherInputCharacter(char character)
-        {
-            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
-            if (!(character >= 'A' && character <= 'Z')) return character;
+        private readonly string _validCharacters;
+        public BiDictionary<char, char> Wiring { get; }
 
-            return InputMap.ContainsKey(character) ? InputMap[character] : character;
+        public Plugboard(string validCharacters)
+        {
+            _validCharacters = validCharacters;
+            Wiring = new BiDictionary<char, char>();
         }
 
-        public override char CipherOutputCharacter(char character)
+        public char Cipher(char character)
         {
-            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
-            if (!(character >= 'A' && character <= 'Z')) return character;
+            if (Wiring.ContainsKey(character)) return Wiring.GetByKey(character);
+            if (Wiring.ContainsValue(character)) return Wiring.GetByValue(character);
 
-            return OutputMap.ContainsKey(character) ? OutputMap[character] : character;
+            return character;
         }
 
         public void Connect(char A, char B)
         {
-            A = char.ToUpper(A);
-            B = char.ToUpper(B);
+            if( !_validCharacters.Contains(A) || !_validCharacters.Contains(B))
+            {
+                throw new ArgumentException("The attempted connection contains characters that are not considered valid.");
+            }
 
-            if (!(A >= 'A' && A <= 'Z'))
-                throw new ArgumentException($"Invalid character. Input can be only ASCII uppercase letter.");
-
-            if (!(B >= 'A' && B <= 'Z'))
-                throw new ArgumentException($"Invalid character. Output can be only ASCII uppercase letter.");
-
-            if (InputMap.ContainsKey(A))
-                throw new ArgumentException($"The {A} is already connected with {InputMap[A]}.");
-
-            if (OutputMap.ContainsKey(B))
-                throw new ArgumentException($"The {B} is already connected with {OutputMap[B]}.");
-
-            InputMap.Add(A, B);
-            OutputMap.Add(B, A);
+            Wiring.Add(A, B);
         }
+
         public void Disconnect(char A)
         {
-            char B = InputMap.TryGetValue(A, out B) ? B : throw new ArgumentException($"The {A} is not connected to any other input.");
-
-            InputMap.Remove(A);
-            OutputMap.Remove(B);
-        }
-
-        public void Disconnect(char A, char B)
-        {
-            InputMap.Remove(A);
-            OutputMap.Remove(B);
+            Wiring.RemoveByKey(A);
+            Wiring.RemoveByValue(A);
         }
     }
 }
