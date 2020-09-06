@@ -4,21 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Enigmatic.Main.Machine.EnigmaZ
+namespace Enigmatic.Main.Machine.EnigmaB
 {
-    public class EnigmaZ : IEnigma
+    class EnigmaB : IEnigma
     {
-
         private readonly EntryWheel etw;
-        private readonly Rotor leftRotor;
-        private readonly Rotor middleRotor;
-        private readonly Rotor rightRotor;
-        private readonly Rotor ukw;
+        private Rotor leftRotor;
+        private Rotor middleRotor;
+        private Rotor rightRotor;
+        private readonly Reflector ukw;
 
-        public EnigmaZ(string rotorSettings, string ringSettings)
+        public EnigmaB(string rotorSettings, string ringSettings)
         {
-            var rotorFactory = new EnigmaZRotorFactory();
-            etw = new EntryWheel("1234567890", "1234567890");
+            var rotorFactory = new EnigmaBRotorFactory();
+
+            etw = new EntryWheel("ABCDEFGHIJKLMNOPQRSTUVXYZÅÄÖ", "ABCDEFGHIJKLMNOPQRSTUVXYZÅÄÖ");
+            ukw = new Reflector("ABCDEFGHIJKLMNOPQRSTUVXYZÅÄÖ", "LDGBÄNCPSKJAVFZHXUIÅRMQÖOTEY");
 
             string[] rotorTypes = rotorSettings.Split(' ');
             char[] ringTypes = ringSettings.Split(' ').Select(x => x[0]).ToArray();
@@ -26,14 +27,11 @@ namespace Enigmatic.Main.Machine.EnigmaZ
             leftRotor = rotorFactory.CreateRotor(rotorTypes[0], ringTypes[0]);
             middleRotor = rotorFactory.CreateRotor(rotorTypes[1], ringTypes[1]);
             rightRotor = rotorFactory.CreateRotor(rotorTypes[2], ringTypes[2]);
-
-            ukw = new Rotor("1234567890", "5079183642", "0", '0');
         }
 
         public string EncryptMessage(string message)
         {
             StringBuilder cipherMessage = new StringBuilder();
-
             char curChar;
 
             foreach (char c in message)

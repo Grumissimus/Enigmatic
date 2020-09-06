@@ -6,7 +6,6 @@ namespace Enigmatic.Main.Machine
 {
     public interface IEnigma
     {
-        void Reset();
         string EncryptMessage(string message);
     }
 }

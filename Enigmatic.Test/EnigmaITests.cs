@@ -22,7 +22,7 @@ namespace Enigmatic.Test
             ExpectedResult = "BPIU ISAYAZ SIVO KW DGSGM UM LDW ATASNT E (YELS) OFSCN OEMLKJAGT SLW PDMGRWF ZNTIQ BGZWCBGPGO MTBEBFW EDRIIAAB")]
         public string EnigmaI_EncryptsMessageCorrectly(string message)
         {
-            EnigmaI = new EnigmaI("I II III", "A A A", "A", "");
+            EnigmaI = new EnigmaI("I II III", "A A A", "A");
             return EnigmaI.EncryptMessage(message);
         }
 
@@ -30,7 +30,7 @@ namespace Enigmatic.Test
         [TestCase("HELLO WORLD", "C K M", ExpectedResult = "NFTBU ZCGMB")]
         public string EnigmaI_EncryptsMessageCorrectlyWithSetInitialPositionsDifferentThanAAA(string message, string initPos)
         {
-            EnigmaI = new EnigmaI("I II III", initPos, "A", "");
+            EnigmaI = new EnigmaI("I II III", initPos, "A");
             return EnigmaI.EncryptMessage(message);
         }
     }

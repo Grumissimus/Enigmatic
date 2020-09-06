@@ -32,11 +32,6 @@ namespace Enigmatic.Main.Machine.EnigmaI
             ukw = reflectorFactory.CreateReflector(uwkType);
         }
 
-        public void Reset()
-        {
-
-        }
-
         public string EncryptMessage(string message)
         {
             StringBuilder cipherMessage = new StringBuilder();
