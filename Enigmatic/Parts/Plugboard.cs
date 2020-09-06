@@ -1,64 +1,82 @@
-﻿using Enigmatic.Main.Interfaces;
+﻿using Enigmatic.Main.Common;
+using Enigmatic.Main.Interfaces;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Enigmatic.Main.Parts
 {
-    public class Plugboard : Cipherable, IPlugboard
+    public class Plugboard : IPlugboard
     {
+        private readonly string _validCharacters;
+        public BiDictionary<char, char> Wiring { get; }
+
         public Plugboard()
         {
-            InputMap = new Dictionary<char, char>();
-            OutputMap = new Dictionary<char, char>();
-        }
-        public override char CipherInputCharacter(char character)
-        {
-            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
-            if (!(character >= 'A' && character <= 'Z')) return character;
-
-            return InputMap.ContainsKey(character) ? InputMap[character] : character;
+            _validCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            Wiring = new BiDictionary<char, char>();
         }
 
-        public override char CipherOutputCharacter(char character)
+        public Plugboard(string validCharacters)
         {
-            if (character >= 'a' && character <= 'z') character = char.ToUpper(character);
-            if (!(character >= 'A' && character <= 'Z')) return character;
+            _validCharacters = validCharacters;
+            Wiring = new BiDictionary<char, char>();
+        }
 
-            return OutputMap.ContainsKey(character) ? OutputMap[character] : character;
+        public Plugboard(string validCharacters, string[] connections)
+        {
+            _validCharacters = validCharacters;
+            Wiring = new BiDictionary<char, char>();
+
+            foreach (string conn in connections)
+            {
+                Connect(conn[0], conn[1]);
+            }
+        }
+
+        public Plugboard(string validCharacters, string connections = "", char separator = ' ')
+        {
+            _validCharacters = validCharacters;
+            Wiring = new BiDictionary<char, char>();
+
+            if (!string.IsNullOrEmpty(connections))
+            {
+                string[] connectionsArray = connections.Split(separator);
+
+                if (!connectionsArray.All(x => x.Length == 2))
+                {
+                    throw new ArgumentException("Plugboard configuration contains at least one incorrect connection.");
+                }
+
+                foreach (string conn in connections.Split(separator))
+                {
+                    Connect(conn[0], conn[1]);
+                }
+            }
+        }
+
+        public char Cipher(char character)
+        {
+            if (Wiring.ContainsKey(character)) return Wiring.GetByKey(character);
+            if (Wiring.ContainsValue(character)) return Wiring.GetByValue(character);
+
+            return character;
         }
 
         public void Connect(char A, char B)
         {
-            A = char.ToUpper(A);
-            B = char.ToUpper(B);
+            if( !_validCharacters.Contains(A) || !_validCharacters.Contains(B))
+            {
+                throw new ArgumentException("The attempted connection contains characters that are not considered valid.");
+            }
 
-            if (!(A >= 'A' && A <= 'Z'))
-                throw new ArgumentException($"Invalid character. Input can be only ASCII uppercase letter.");
-
-            if (!(B >= 'A' && B <= 'Z'))
-                throw new ArgumentException($"Invalid character. Output can be only ASCII uppercase letter.");
-
-            if (InputMap.ContainsKey(A))
-                throw new ArgumentException($"The {A} is already connected with {InputMap[A]}.");
-
-            if (OutputMap.ContainsKey(B))
-                throw new ArgumentException($"The {B} is already connected with {OutputMap[B]}.");
-
-            InputMap.Add(A, B);
-            OutputMap.Add(B, A);
+            Wiring.Add(A, B);
         }
+
         public void Disconnect(char A)
         {
-            char B = InputMap.TryGetValue(A, out B) ? B : throw new ArgumentException($"The {A} is not connected to any other input.");
-
-            InputMap.Remove(A);
-            OutputMap.Remove(B);
-        }
-
-        public void Disconnect(char A, char B)
-        {
-            InputMap.Remove(A);
-            OutputMap.Remove(B);
+            Wiring.RemoveByKey(A);
+            Wiring.RemoveByValue(A);
         }
     }
 }

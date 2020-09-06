@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace Enigmatic.Main
 {
     class Program

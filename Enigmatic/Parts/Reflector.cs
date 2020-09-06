@@ -2,9 +2,13 @@
 
 namespace Enigmatic.Main.Parts
 {
-    public class Reflector : Cipherable, IReflector
+    public class Reflector : Wheel
     {
-        public Reflector(string map) : base(map)
+        public Reflector(string output) : base(output)
+        {
+        }
+
+        public Reflector(string input, string output) : base(input, output)
         {
         }
     }

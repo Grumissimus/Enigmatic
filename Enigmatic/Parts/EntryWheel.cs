@@ -1,8 +1,12 @@
 ﻿namespace Enigmatic.Main.Parts
 {
-    public class EntryWheel : Cipherable
+    public class EntryWheel : Wheel
     {
-        public EntryWheel(string map = "ABCDEFGHIJKLMNOPQRSTUVWXYZ") : base(map)
+        public EntryWheel(string output) : base(output)
+        {
+        }
+
+        public EntryWheel(string input, string output) : base(input, output)
         {
         }
     }
